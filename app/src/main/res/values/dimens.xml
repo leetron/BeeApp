@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="general_margin">16dp</dimen>
+    <dimen name="general_padding">8dp</dimen>
+    <dimen name="avatar_size">56dp</dimen>
+    <dimen name="general_height">40dp</dimen>
+</resources>

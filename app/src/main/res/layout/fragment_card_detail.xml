@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="card"
+            type="luclx.com.beapp.data.local.entity.CardEntity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="72dp"
+                android:fontFamily="@font/roboto"
+                android:text="CARD DEATAILs"
+                android:textColor="#000127"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="#1a000127" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/general_padding"
+                android:background="@drawable/bg_item_view"
+                android:padding="@dimen/general_margin">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="@dimen/avatar_size"
+                    android:layout_height="@dimen/avatar_size"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/viewholder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvDisplayName"
+                        style="@style/General_TextView"
+                        android:text="@{card.getFullName()}"
+                        android:textColor="#000127"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Display name" />
+
+                    <TextView
+                        android:id="@+id/tvMobile"
+                        style="@style/General_TextView"
+                        android:layout_marginTop="12dp"
+                        android:text="@{card.getPhone()}"
+                        tools:text="Mobile: 016 6645 9432" />
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        style="@style/General_TextView"
+                        android:text="@{card.getAddressEd()}"
+                        tools:text="Address: 184 CMT8, P5, Q10, Ho Van Hue" />
+
+                    <TextView
+                        android:id="@+id/tvCompany"
+                        style="@style/General_TextView"
+                        android:text="@{card.getCompanyEd()}"
+                        tools:text="Company: CBA" />
+
+                    <TextView
+                        android:id="@+id/tvPosition"
+                        style="@style/General_TextView"
+                        android:text="@{card.getPositionEd()}"
+                        tools:text="Position: CEO" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Gender: "
+                    android:textColor="#43445E"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="@{card.gender}"
+                    android:textColor="@android:color/black"
+                    tools:text="Male" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="DOB: "
+                    android:textColor="#43445E"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDOB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="@{card.dob}"
+                    android:textColor="@android:color/black"
+                    tools:text="12/05/88" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvAbout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:textColor="@android:color/black"
+                tools:text="About: Elit veniam veniam irure in voluptate. Mollit velit dolore laborum qui in ea qui nisi. Et magna quis proident est non velit sunt minim amet cupidatat eiusmod tempor sit" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

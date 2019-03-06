@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <ImageView
+                    android:id="@+id/btnClose"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/general_margin"
+                    android:src="@drawable/close" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="72dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="NEW CARD VISIT"
+                    android:textColor="#000127"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#1a000127" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/general_margin">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/viewholder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/general_height"
+                    android:layout_marginTop="@dimen/general_margin"
+                    android:background="@drawable/bg_search_view"
+                    android:hint="Name"
+                    android:nextFocusDown="@+id/etAddress"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/general_height"
+                    android:layout_marginTop="@dimen/general_margin"
+                    android:background="@drawable/bg_search_view"
+                    android:hint="Address"
+                    android:nextFocusDown="@+id/etPosition"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/etPosition"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/general_height"
+                    android:layout_marginTop="@dimen/general_margin"
+                    android:background="@drawable/bg_search_view"
+                    android:hint="Position (E.g CEO, CEF)"
+                    android:nextFocusDown="@+id/etAbout"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/etAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/general_height"
+                    android:layout_marginTop="@dimen/general_margin"
+                    android:background="@drawable/bg_search_view"
+                    android:hint="About"
+                    android:nextFocusDown="@+id/etGender"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/etGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/general_height"
+                    android:layout_marginTop="@dimen/general_margin"
+                    android:background="@drawable/bg_search_view"
+                    android:hint="Gender"
+                    android:nextFocusDown="@+id/etDOB"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/etDOB"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/general_height"
+                    android:layout_marginTop="@dimen/general_margin"
+                    android:background="@drawable/bg_search_view"
+                    android:hint="DOB"
+                    android:padding="10dp" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/general_height"
+                    android:layout_marginTop="@dimen/general_height"
+                    android:background="@drawable/bg_btn"
+                    android:gravity="center"
+                    android:text="SAVE" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
