@@ -3,11 +3,10 @@
 
 Languages, libraries and tools used
 
-- [Kotlin](https://kotlinlang.org/) and [AndroidX]
-(https://developer.android.com/jetpack/androidx)
+- [Kotlin](https://kotlinlang.org/) and [AndroidX](https://developer.android.com/jetpack/androidx)
 - MVVM Architectural pattern (MVVM + LiveData + Room)
 - Unit test demonstration using JUnit and [Espresso]((https://google.github.io/android-testing-support-library/docs/espresso/index.html))
-- [RxJava](https://github.com/ReactiveX/RxJava) and [RxAndroid](https://github.com/ReactiveX/RxAndroid) 
+- [RxJava](https://github.com/ReactiveX/RxJava) and [RxAndroid](https://github.com/ReactiveX/RxAndroid)
 - Dependency Injection with [Dagger 2](http://google.github.io/dagger/)
 - [Room](https://developer.android.com/topic/libraries/architecture/room.html) Persistence Library
 - Network communication with [Retrofit 2](http://square.github.io/retrofit/)
@@ -17,7 +16,9 @@ Languages, libraries and tools used
 
 * Demo for new android component
 
-[TO-DO: DiffUtils]
+## TO-DO list
+- Complete cache data
+- Add more futures
 
 ## Requirements
 
@@ -36,7 +37,7 @@ This project follows Android architecture guidelines that are based on MVVM.
 
 # How to build ?
 
-Open terminal and type the below command to generate debug build 
+Open terminal and type the below command to generate debug build
 
 ``` ./gradlew assembleDebug ```
 
