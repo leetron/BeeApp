@@ -10,4 +10,6 @@ interface ICardRequest {
 	fun getCardPage(page: Int, needLocalData: Boolean): LiveData<Resource<List<CardEntity>>>
 
 	fun addCard(card: CardEntity): Completable
+
+	fun notifyData(): LiveData<CardEntity>
 }

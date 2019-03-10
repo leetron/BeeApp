@@ -17,4 +17,7 @@ interface CardDao {
 
 	@Insert(onConflict = OnConflictStrategy.IGNORE)
 	fun insertCardIfNotExist(cardEntity: CardEntity): Long
+
+	@Query("SELECT  * FROM card ORDER BY card.isMind ASC LIMIT 1")
+	fun loadNewCard(): LiveData<CardEntity>
 }

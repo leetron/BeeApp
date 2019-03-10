@@ -50,4 +50,8 @@ class CardRepository @Inject constructor(
 			it.onComplete()
 		}
 	}
+
+	override fun notifyData(): LiveData<CardEntity> {
+		return iDao.loadNewCard()
+	}
 }

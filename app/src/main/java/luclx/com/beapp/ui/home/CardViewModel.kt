@@ -1,5 +1,6 @@
 package luclx.com.beapp.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.Completable
 import luclx.com.beapp.data.local.entity.CardEntity
@@ -22,5 +23,9 @@ class CardViewModel @Inject constructor(
 
 	fun addCard(card: CardEntity): Completable {
 		return cardRepository.addCard(card)
+	}
+
+	fun notifyData(): LiveData<CardEntity> {
+		return cardRepository.notifyData()
 	}
 }

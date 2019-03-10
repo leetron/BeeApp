@@ -3,6 +3,7 @@ package luclx.com.beapp.ui.home
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,7 @@ class CardListFragment :
 		super.onViewCreated(view, savedInstanceState)
 		initSearch()
 		initCardList()
+		initNotifyData()
 		setOnClick(this, dataBinding.fab)
 		getData(++viewModel.page, true)
 	}
@@ -141,7 +143,18 @@ class CardListFragment :
 
 	@Subscribe
 	fun updateAddCard(newCardEvent: OnAddNewCard) {
-		(dataBinding.rvCards.adapter as CardListAdapter).addLocal(newCardEvent.card)
-		dataBinding.rvCards.smoothScrollToPosition(0)
+//		(dataBinding.rvCards.adapter as CardListAdapter).addLocal(newCardEvent.card)
+//		dataBinding.rvCards.smoothScrollToPosition(0)
+	}
+
+	private fun initNotifyData() {
+		Handler().postDelayed({
+			viewModel.notifyData().observe(this, Observer { card ->
+				card?.let {
+					(dataBinding.rvCards.adapter as CardListAdapter).addLocal(it)
+					dataBinding.rvCards.smoothScrollToPosition(0)
+				}
+			})
+		}, 1000)
 	}
 }
