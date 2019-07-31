@@ -7,9 +7,9 @@ import luclx.com.beapp.data.remote.Resource
 
 interface ICardRequest {
 
-	fun getCardPage(page: Int, needLocalData: Boolean): LiveData<Resource<List<CardEntity>>>
+    fun getCardPage(page: Int, needLocalData: Boolean): LiveData<Resource<List<CardEntity>>>
 
-	fun addCard(card: CardEntity): Completable
+    fun addCard(card: CardEntity): Completable
 
-	fun notifyData(): LiveData<CardEntity>
+    fun notifyData(): LiveData<CardEntity>
 }

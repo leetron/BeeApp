@@ -10,6 +10,6 @@ import luclx.com.beapp.ui.home.MainActivity
 
 @Module
 abstract class ActivityBuilderModule {
-	@ContributesAndroidInjector(modules = [FragmentBuilderModule::class])
-	abstract fun contributeMainActivity(): MainActivity
+    @ContributesAndroidInjector(modules = [FragmentBuilderModule::class])
+    abstract fun contributeMainActivity(): MainActivity
 }

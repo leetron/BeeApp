@@ -12,12 +12,12 @@ import luclx.com.beapp.ui.home.CardListFragment
 
 @Module
 abstract class FragmentBuilderModule {
-	@ContributesAndroidInjector
-	abstract fun contributeCardListFragment(): CardListFragment
+    @ContributesAndroidInjector
+    abstract fun contributeCardListFragment(): CardListFragment
 
-	@ContributesAndroidInjector
-	abstract fun contributeCardDetailFragment(): CardDetailFragment
+    @ContributesAndroidInjector
+    abstract fun contributeCardDetailFragment(): CardDetailFragment
 
-	@ContributesAndroidInjector
-	abstract fun contributeCardAddFragment(): CardAddFragment
+    @ContributesAndroidInjector
+    abstract fun contributeCardAddFragment(): CardAddFragment
 }

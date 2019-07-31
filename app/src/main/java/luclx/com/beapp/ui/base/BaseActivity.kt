@@ -18,19 +18,19 @@ import javax.inject.Inject
 
 abstract class BaseActivity<D : ViewDataBinding> : AppCompatActivity(), HasSupportFragmentInjector {
 
-	@Inject
-	lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-	private lateinit var dataBinding: D
+    private lateinit var dataBinding: D
 
-	@LayoutRes
-	abstract fun getLayoutResource(): Int
+    @LayoutRes
+    abstract fun getLayoutResource(): Int
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		AndroidInjection.inject(this)
-		super.onCreate(savedInstanceState)
-		dataBinding = DataBindingUtil.setContentView(this, getLayoutResource())
-	}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
+        dataBinding = DataBindingUtil.setContentView(this, getLayoutResource())
+    }
 
-	override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 }

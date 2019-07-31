@@ -13,45 +13,45 @@ import retrofit2.Call
 import javax.inject.Inject
 
 class CardRepository @Inject constructor(
-	val iDao: CardDao,
-	val iApi: ApiService
+    val iDao: CardDao,
+    val iApi: ApiService
 ) : ICardRequest {
-	override fun getCardPage(
-		page: Int,
-		needLocalData: Boolean
-	): LiveData<Resource<List<CardEntity>>> {
-		return object : NetworkBoundResourceNoneLocal<List<CardEntity>, List<Card>>() {
-			override fun needLoadLocal(): Boolean {
-				return needLocalData
-			}
+    override fun getCardPage(
+        page: Int,
+        needLocalData: Boolean
+    ): LiveData<Resource<List<CardEntity>>> {
+        return object : NetworkBoundResourceNoneLocal<List<CardEntity>, List<Card>>() {
+            override fun needLoadLocal(): Boolean {
+                return needLocalData
+            }
 
-			override fun loadFromDb(): LiveData<List<CardEntity>> {
-				return iDao.loadCard()
-			}
+            override fun loadFromDb(): LiveData<List<CardEntity>> {
+                return iDao.loadCard()
+            }
 
-			override fun createCall(): Call<List<Card>> {
-				return iApi.loadCardPage(page)
-			}
+            override fun createCall(): Call<List<Card>> {
+                return iApi.loadCardPage(page)
+            }
 
-			override fun convertData(item: List<Card>): List<CardEntity> {
-				val resultList = mutableListOf<CardEntity>()
-				item.forEach {
-					resultList.add(it.toCardEntity())
-				}
+            override fun convertData(item: List<Card>): List<CardEntity> {
+                val resultList = mutableListOf<CardEntity>()
+                item.forEach {
+                    resultList.add(it.toCardEntity())
+                }
 
-				return resultList
-			}
-		}.asLiveData()
-	}
+                return resultList
+            }
+        }.asLiveData()
+    }
 
-	override fun addCard(card: CardEntity): Completable {
-		return Completable.create {
-			iDao.insertCard(card)
-			it.onComplete()
-		}
-	}
+    override fun addCard(card: CardEntity): Completable {
+        return Completable.create {
+            iDao.insertCard(card)
+            it.onComplete()
+        }
+    }
 
-	override fun notifyData(): LiveData<CardEntity> {
-		return iDao.loadNewCard()
-	}
+    override fun notifyData(): LiveData<CardEntity> {
+        return iDao.loadNewCard()
+    }
 }

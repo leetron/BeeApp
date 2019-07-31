@@ -9,15 +9,15 @@ import luclx.com.beapp.data.local.entity.CardEntity
 
 @Dao
 interface CardDao {
-	@Query("SELECT * FROM card ORDER BY card.isMind DESC")
-	fun loadCard(): LiveData<List<CardEntity>>
+    @Query("SELECT * FROM card ORDER BY card.isMind DESC")
+    fun loadCard(): LiveData<List<CardEntity>>
 
-	@Insert(onConflict = OnConflictStrategy.REPLACE)
-	fun insertCard(cardEntity: CardEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertCard(cardEntity: CardEntity)
 
-	@Insert(onConflict = OnConflictStrategy.IGNORE)
-	fun insertCardIfNotExist(cardEntity: CardEntity): Long
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertCardIfNotExist(cardEntity: CardEntity): Long
 
-	@Query("SELECT  * FROM card ORDER BY card.isMind ASC LIMIT 1")
-	fun loadNewCard(): LiveData<CardEntity>
+    @Query("SELECT  * FROM card ORDER BY card.isMind ASC LIMIT 1")
+    fun loadNewCard(): LiveData<CardEntity>
 }

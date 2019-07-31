@@ -18,82 +18,82 @@ import java.net.SocketTimeoutException
 abstract class NetworkBoundResource<DBType, APIType>
 @MainThread constructor() {
 
-	private val result = MediatorLiveData<Resource<DBType>>()
+    private val result = MediatorLiveData<Resource<DBType>>()
 
-	init {
-		result.value = Resource.loading(null)
+    init {
+        result.value = Resource.loading(null)
 
-		// Always load the data from DB
-		@Suppress("LeakingThis")
-		val dbSource = loadFromDb()
+        // Always load the data from DB
+        @Suppress("LeakingThis")
+        val dbSource = loadFromDb()
 
-		// Fetch the data from network and add it to the resource
-		result.addSource(dbSource) {
-			result.removeSource(dbSource)
-			fetchFromNetwork(dbSource)
-		}
-	}
+        // Fetch the data from network and add it to the resource
+        result.addSource(dbSource) {
+            result.removeSource(dbSource)
+            fetchFromNetwork(dbSource)
+        }
+    }
 
-	private fun fetchFromNetwork(dbSource: LiveData<DBType>) {
-		result.addSource(dbSource) { newData -> result.setValue(Resource.loading(newData)) }
-		createCall().enqueue(object : Callback<APIType> {
-			override fun onResponse(call: Call<APIType>, response: Response<APIType>) {
-				result.removeSource(dbSource)
-				response.body()?.let {
-					saveResultAndReturnIt(it)
-				}
-			}
+    private fun fetchFromNetwork(dbSource: LiveData<DBType>) {
+        result.addSource(dbSource) { newData -> result.setValue(Resource.loading(newData)) }
+        createCall().enqueue(object : Callback<APIType> {
+            override fun onResponse(call: Call<APIType>, response: Response<APIType>) {
+                result.removeSource(dbSource)
+                response.body()?.let {
+                    saveResultAndReturnIt(it)
+                }
+            }
 
-			override fun onFailure(call: Call<APIType>, t: Throwable) {
-				result.removeSource(dbSource)
-				result.addSource(dbSource) { newData ->
-					result.setValue(
-						Resource.error(
-							getCustomErrorMessage(t),
-							newData
-						)
-					)
-				}
-			}
-		})
-	}
+            override fun onFailure(call: Call<APIType>, t: Throwable) {
+                result.removeSource(dbSource)
+                result.addSource(dbSource) { newData ->
+                    result.setValue(
+                        Resource.error(
+                            getCustomErrorMessage(t),
+                            newData
+                        )
+                    )
+                }
+            }
+        })
+    }
 
-	@SuppressLint("CheckResult")
-	@MainThread
-	private fun saveResultAndReturnIt(response: APIType) {
-		val task = Completable.create {
-			// some action need save local
-			saveCallResult(response)
-			it.onComplete()
-		}
-		task.compose(RxUtil.applyCompletableSchedulers())
-			.subscribe {
-				result.addSource(loadFromDb()) { newData ->
-					newData?.let {
-						result.value = Resource.success(newData)
-					}
-				}
-			}
-	}
+    @SuppressLint("CheckResult")
+    @MainThread
+    private fun saveResultAndReturnIt(response: APIType) {
+        val task = Completable.create {
+            // some action need save local
+            saveCallResult(response)
+            it.onComplete()
+        }
+        task.compose(RxUtil.applyCompletableSchedulers())
+            .subscribe {
+                result.addSource(loadFromDb()) { newData ->
+                    newData?.let {
+                        result.value = Resource.success(newData)
+                    }
+                }
+            }
+    }
 
-	private fun getCustomErrorMessage(error: Throwable): String {
-		return when (error) {
-			is SocketTimeoutException -> "Request time out"
-			is MalformedJsonException -> "Malformed json"
-			is IOException -> "Network exception"
-			is HttpException -> error.response().message()
-			else -> "Something went wrong"
-		}
-	}
+    private fun getCustomErrorMessage(error: Throwable): String {
+        return when (error) {
+            is SocketTimeoutException -> "Request time out"
+            is MalformedJsonException -> "Malformed json"
+            is IOException -> "Network exception"
+            is HttpException -> error.response().message()
+            else -> "Something went wrong"
+        }
+    }
 
-	fun asLiveData() = result as LiveData<Resource<DBType>>
+    fun asLiveData() = result as LiveData<Resource<DBType>>
 
-	@WorkerThread
-	protected abstract fun saveCallResult(item: APIType)
+    @WorkerThread
+    protected abstract fun saveCallResult(item: APIType)
 
-	@MainThread
-	protected abstract fun loadFromDb(): LiveData<DBType>
+    @MainThread
+    protected abstract fun loadFromDb(): LiveData<DBType>
 
-	@MainThread
-	protected abstract fun createCall(): Call<APIType>
+    @MainThread
+    protected abstract fun createCall(): Call<APIType>
 }

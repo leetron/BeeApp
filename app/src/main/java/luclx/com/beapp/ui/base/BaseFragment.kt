@@ -19,52 +19,52 @@ import javax.inject.Inject
 
 abstract class BaseFragment<VM : ViewModel, VDB : ViewDataBinding> : Fragment() {
 
-	@Inject
-	lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-	lateinit var viewModel: VM
+    lateinit var viewModel: VM
 
-	lateinit var dataBinding: VDB
+    lateinit var dataBinding: VDB
 
-	abstract fun getViewModel(): Class<VM>
+    abstract fun getViewModel(): Class<VM>
 
-	@LayoutRes
-	abstract fun getLayoutRes(): Int
+    @LayoutRes
+    abstract fun getLayoutRes(): Int
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		AndroidSupportInjection.inject(this)
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel())
-		EventBus.getDefault().register(this)
-	}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel())
+        EventBus.getDefault().register(this)
+    }
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
-		dataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
-		return dataBinding.root
-	}
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        dataBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        return dataBinding.root
+    }
 
-	override fun onDestroyView() {
-		super.onDestroyView()
-		EventBus.getDefault().unregister(this)
-	}
+    override fun onDestroyView() {
+        super.onDestroyView()
+        EventBus.getDefault().unregister(this)
+    }
 
-	@Subscribe
-	fun dummyEvent(event: DummyEvent) {
-	}
+    @Subscribe
+    fun dummyEvent(event: DummyEvent) {
+    }
 
-	fun setOnClick(views: List<View>?, onClickListener: View.OnClickListener) {
-		views?.forEach {
-			it.setOnClickListener(onClickListener)
-		}
-	}
+    fun setOnClick(views: List<View>?, onClickListener: View.OnClickListener) {
+        views?.forEach {
+            it.setOnClickListener(onClickListener)
+        }
+    }
 
-	fun setOnClick(onClickListener: View.OnClickListener, vararg views: View) {
-		views.forEach {
-			it.setOnClickListener(onClickListener)
-		}
-	}
+    fun setOnClick(onClickListener: View.OnClickListener, vararg views: View) {
+        views.forEach {
+            it.setOnClickListener(onClickListener)
+        }
+    }
 }

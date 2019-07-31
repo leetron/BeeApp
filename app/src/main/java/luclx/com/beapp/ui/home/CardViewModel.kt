@@ -8,24 +8,24 @@ import luclx.com.beapp.respository.CardRepository
 import javax.inject.Inject
 
 class CardViewModel @Inject constructor(
-	private val cardRepository: CardRepository
+    private val cardRepository: CardRepository
 ) : ViewModel() {
-	var page = 0
+    var page = 0
 
-	var loading = false
+    var loading = false
 
-	var canLoad = true
+    var canLoad = true
 
-	fun getCards(
-		page: Int,
-		needLocalData: Boolean = false
-	) = cardRepository.getCardPage(page, needLocalData)
+    fun getCards(
+        page: Int,
+        needLocalData: Boolean = false
+    ) = cardRepository.getCardPage(page, needLocalData)
 
-	fun addCard(card: CardEntity): Completable {
-		return cardRepository.addCard(card)
-	}
+    fun addCard(card: CardEntity): Completable {
+        return cardRepository.addCard(card)
+    }
 
-	fun notifyData(): LiveData<CardEntity> {
-		return cardRepository.notifyData()
-	}
+    fun notifyData(): LiveData<CardEntity> {
+        return cardRepository.notifyData()
+    }
 }

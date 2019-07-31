@@ -10,23 +10,23 @@ import luclx.com.beapp.data.remote.Resource
  */
 
 object BindingAdapter {
-	@JvmStatic
-	@BindingAdapter("visibleGone")
-	fun showHide(view: View, show: Boolean) {
-		view.visibility = if (show) View.VISIBLE else View.GONE
-	}
+    @JvmStatic
+    @BindingAdapter("visibleGone")
+    fun showHide(view: View, show: Boolean) {
+        view.visibility = if (show) View.VISIBLE else View.GONE
+    }
 
-	@JvmStatic
-	@BindingAdapter("resource")
-	fun <D> setResource(
-		recyclerView: RecyclerView,
-		resource: Resource<D>?
-	) {
-		resource?.data?.let {
-			val adapter = recyclerView.adapter
-			adapter?.let {
-				(it as BaseAdapter<*, D>).setData(resource.data as List<D>)
-			}
-		}
-	}
+    @JvmStatic
+    @BindingAdapter("resource")
+    fun <D> setResource(
+        recyclerView: RecyclerView,
+        resource: Resource<D>?
+    ) {
+        resource?.data?.let {
+            val adapter = recyclerView.adapter
+            adapter?.let {
+                (it as BaseAdapter<*, D>).setData(resource.data as List<D>)
+            }
+        }
+    }
 }

@@ -9,16 +9,16 @@ import luclx.com.beapp.utils.FragmentUtils
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-	override fun getLayoutResource() = R.layout.activity_main
+    override fun getLayoutResource() = R.layout.activity_main
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		FragmentUtils.replaceFragment(
-			this,
-			CardListFragment.newInstance(),
-			R.id.container,
-			false,
-			Constant.TRANSITION_NONE
-		)
-	}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        FragmentUtils.replaceFragment(
+            this,
+            CardListFragment.newInstance(),
+            R.id.container,
+            false,
+            Constant.TRANSITION_NONE
+        )
+    }
 }
