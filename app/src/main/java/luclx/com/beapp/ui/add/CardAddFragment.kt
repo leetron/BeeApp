@@ -58,9 +58,6 @@ class CardAddFragment : BaseFragment<CardViewModel, FragmentCardAddBinding>(),
 					.compose(RxUtil.applyCompletableSchedulers())
 					.subscribe {
 						btnClose.performClick()
-						EventBus.getDefault().post(
-							OnAddNewCard(newCard)
-						)
 					}
 			}
 		}
